@@ -145,6 +145,7 @@ app.use('/api/vehicles', require('./routes/vehicles'));
 app.use('/api/trips', tripVehiclesRoutes);
 app.use('/api/trips', require('./routes/trips'));
 app.use('/api/public', publicSiteRoutes);
+app.use('/api/incoming-calls', incomingCallsRouter);
 // ✅ Blacklist: montăm la /api (rutele interne sunt /blacklist, /blacklist/check etc.)
 //    RBAC este definit per-metodă în routes/blacklist.js
 app.use('/api', require('./routes/blacklist'));
