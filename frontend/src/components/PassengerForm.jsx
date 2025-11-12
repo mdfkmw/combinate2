@@ -20,6 +20,8 @@ const PassengerForm = ({
     fetchPrice,
     setToastMessage,
     setToastType,
+    incomingCall,
+    onApplyIncomingCall,
     toggleSeat,
     seats,
     selectedDate,
@@ -122,6 +124,14 @@ const PassengerForm = ({
 
     const passenger = passengersData[seat.id] || {};
     const { errors } = isPassengerValid(passenger);
+    const incomingPhoneValue = incomingCall?.phone ? String(incomingCall.phone).trim() : '';
+    const incomingDigits = incomingCall?.digits ? String(incomingCall.digits).replace(/\D/g, '') : '';
+    const passengerValue = typeof passenger.phone === 'string' ? passenger.phone : '';
+    const passengerHasPhone = passengerValue.trim().length > 0;
+    const passengerDigits = passengerValue.replace(/\D/g, '');
+    const canApplyIncomingCall = Boolean(onApplyIncomingCall)
+        && Boolean(incomingPhoneValue || incomingDigits)
+        && (!passengerHasPhone || passengerDigits !== incomingDigits);
     // ─── blacklist warning state ───
     const [blacklistInfo, setBlacklistInfo] = useState(null);
     const [showBlacklistDetails, setShowBlacklistDetails] = useState(false);
@@ -927,6 +937,16 @@ const PassengerForm = ({
 
                     {/* container pentru toate iconițele, ca să le poziționăm pe orizontală */}
                     <div className="absolute top-2 right-3 flex space-x-1">
+                        {canApplyIncomingCall && (
+                            <button
+                                type="button"
+                                onClick={() => onApplyIncomingCall?.(seat.id)}
+                                className="text-blue-600 text-lg hover:opacity-75"
+                                title="Aplică ultimul număr apelat"
+                            >
+                                📞
+                            </button>
+                        )}
 
 
 
