@@ -123,6 +123,9 @@ export default function ReservationPage({ userRole, user }) {
   const incomingCallPollTimerRef = useRef(null);
   // 🗺️ ID-ul cursei (trip) curente pentru cereri precise
   const [tripId, setTripId] = useState(null);
+  // 🔔 Textul și tipul notificărilor (toast)
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState('info');
 
   // Cheie stabilă pentru stații (prima | ultima) — evită rerender-uri inutile
   const stationsKey = useMemo(() => {
@@ -630,11 +633,6 @@ export default function ReservationPage({ userRole, user }) {
   const [shake, setShake] = useState(false); // efect vizual la erori
   // ✅ Mesaj de confirmare sau eroare la salvare
   const [saveMessage, setSaveMessage] = useState('');
-  // 🔔 Textul notificării (toast)
-  const [toastMessage, setToastMessage] = useState('');
-  // 🔔 Tipul notificării (info, success, error)
-  const [toastType, setToastType] = useState('info');
-
   // ✏️ Control pentru afișarea/ascunderea observațiilor per loc
   const [notesVisibility, setNotesVisibility] = useState({});
   // 🚐 Control pentru afișarea popup-ului de alegere vehicul
