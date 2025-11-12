@@ -64,6 +64,7 @@ const invitationsRoutes = require('./routes/invitations');
 const userPrefs = require('./routes/userPrefs');
 const intentsRoutes = require('./routes/intents');
 const chatRoutes = require('./routes/chat');
+const incomingCallsRouter = require('./routes/incomingCalls');
 // === SERVEȘTE FRONTEND-UL (Vite build) DIN EXPRESS ===
 const path = require('path');
 
@@ -165,6 +166,7 @@ app.use('/api/fiscal-settings', fiscalSettingsRouter);
 app.use('/api/online-settings', onlineSettingsRouter);
 
 app.use('/api/phones', phonesRoutes);
+app.use('/api/incoming-calls', incomingCallsRouter);
 app.use('/api/traveler-defaults', requireAuth, travelerDefaultsRouter);
 app.use('/api/promo-codes', promoCodesRoutes);
 // Log global (router separat) – doar montare aici, logica este în routes/audit.js
